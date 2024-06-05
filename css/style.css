@@ -1,0 +1,12 @@
+body {
+    padding-top: 56px; /* Adjust if needed */
+}
+.jumbotron {
+    background-color: #ffffff;
+    padding: 2rem 1rem;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
