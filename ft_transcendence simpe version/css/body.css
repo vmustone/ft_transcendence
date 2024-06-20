@@ -1,0 +1,7 @@
+body {
+    overflow: hidden;
+    background-image: url("/assets/images/Pong.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
