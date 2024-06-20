@@ -1,0 +1,29 @@
+@keyframes zoom {
+    from {transform: scale(1);}
+    to {transform: scale(2.5);}
+     /* Zooms in towards the button */
+}
+
+body.zoom {
+    animation-name: zoom;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    transform-origin: center center; /* Ensures the zooming centers on the middle of the page */
+    transition: transform 3s ease-in-out;
+}
+
+.mainMenu {
+    display: none; /* Hide the menu by default */
+    background-color: rgb(255, 255, 255);
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainMenu.show {
+    display: flex; /* Show the menu when the 'show' class is added */
+}
