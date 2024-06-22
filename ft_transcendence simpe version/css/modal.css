@@ -1,3 +1,7 @@
+.modal_dialog {
+  align-items: center;
+}
+
 .modal-content {
   display: flex;
   justify-content: center;
@@ -20,6 +24,7 @@
 }
 .modal-title {
   color:white;
+  font-family: "Teko", sans-serif;
 }
 
 .modal-header {
