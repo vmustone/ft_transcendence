@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ft_transcendence</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/svg.css">
     <link rel="stylesheet" href="css/body.css">
     <link rel="stylesheet" href="css/modal.css">
+
+    <link rel="stylesheet" href="css/stars.css">
 </head>
 
 <body>
     
     <div class="headerContainer">
-        <svg width="1000" height="150" viewBox="0 -20 490 120" xmlns="http://www.w3.org/2000/svg">
+        <svg width="1000" height="150" viewBox="0 -30 506 120" xmlns="http://www.w3.org/2000/svg">
             <g id="logo" vector-effect="non-scaling-stroke">
                 <path d="M 131.397 46.875 L 138.623 17.48 Q 
             138.538 17.48 133.688 17.794 A 10643.208 10643.208 0 0 0 132.129 17.896 A 80.044 80.044 0 0 1 130.46 17.987 Q 125.355 18.211 122.949 17.578 Q 120.994 16.66 120.376 15.579 A 
@@ -186,15 +186,26 @@
     <div class="buttonContainer col-md-12">
         <button class="buttons">Play</button>
         <button class="buttons">Tournament</button>
-        <button class="buttons" onclick="signmodalToggle()">Sign up</button>
-        <button class="buttons" onclick="logmodalToggle()">Log in</button>
-        <button class="buttons">About</button>
+        <button class="buttons" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign up</button>
+        <button class="buttons" data-bs-toggle="modal" data-bs-target="#logInModal">Log in</button>
+        <button class="buttons" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button>
     </div>
 
     <!-- Sign up Modal -->
-    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <div class="modal-header row col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <h2 style="text-align: center;" class="modal-title" id="signInModalLabel">Sign up</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" data-bs-dismiss="modal" class="close"; aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="stars">
                     <div class="star"></div>
                     <div class="star"></div>
@@ -239,42 +250,30 @@
                     <div class="star"></div>    
                 </div>
 
-                <div class="modal-header row col-md-12">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <h5 style="text-align: center;" class="modal-title" id="signInModalLabel">Sign up</h5>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="button" onclick="signmodalClose()" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-
                 <div class="modal-body">
                     <!-- Sign In Form -->
-                    <form id="signInForm">
+                    <form id="signUpForm">
                         <!-- Email field -->
                         <div class="form-group">
-                            <label for="signInEmail">Email</label>
-                            <input type="email" class="form-control" id="signInEmail" placeholder="Enter email">
+                            <label class="labelFont" for="signUpEmail">Email</label>
+                            <input type="email" class="form-control" id="signUpEmail" placeholder="Enter email">
                         </div>
                         <!-- Username field -->
                         <div class="form-group">
-                            <label for="signInUsername">Username</label>
-                            <input type="text" class="form-control" id="signInUsername" placeholder="Enter username">
+                            <label class="labelFont" for="signUpUsername">Username</label>
+                            <input type="text" class="form-control" id="signUpUsername" placeholder="Enter username">
                         </div>
                         <!-- Password field -->
                         <div class="form-group">
-                            <label for="signInPassword">Password</label>
-                            <input type="password" class="form-control" id="signInPassword" placeholder="Enter password">
+                            <label class="labelFont" for="signUpPassword">Password</label>
+                            <input type="password" class="form-control" id="signUpPassword" placeholder="Enter password">
                         </div>
                         <!-- Re-enter Password field -->
                         <div class="form-group">
-                            <label for="signInRePassword">Re-enter Password</label>
-                            <input type="password" class="form-control" id="signInRePassword" placeholder="Re-enter password">
+                            <label class="labelFont" for="signUpRePassword">Re-enter Password</label>
+                            <input type="password" class="form-control" id="signUpRePassword" placeholder="Re-enter password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign up</button>
+                        <button type="submit" class="submit">Sign up</button>
                     </form>
                 </div>
             </div>
@@ -282,9 +281,20 @@
     </div>
 
     <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="logInModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <div class="modal-header row col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <h2 style="text-align: center;" class="modal-title" id="logInModalLabel">Log in</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" data-bs-dismiss="modal" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="stars">
                     <div class="star"></div>
                     <div class="star"></div>
@@ -328,38 +338,118 @@
                     <div class="star"></div>
                     <div class="star"></div>
                 </div>
-                <div class="modal-header row col-md-12">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <h5 style="text-align: center;" class="modal-title" id="signInModalLabel">Log in</h5>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="button" onclick="logmodalClose()" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
                 <div class="modal-body">
                     <!-- Login Form -->
-                    <form id="loginForm">
+                    <form id="logInForm">
                         <!-- Username field -->
                         <div class="form-group">
-                            <label for="loginUsername">Username</label>
-                            <input type="text" class="form-control" id="loginUsername" placeholder="Enter username">
+                            <label class="labelFont" for="logInUsername">Username</label>
+                            <input type="text" class="form-control" id="logInUsername" placeholder="Enter username">
                         </div>
                         <!-- Password field -->
                         <div class="form-group">
-                            <label for="loginPassword">Password</label>
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password">
+                            <label class="labelFont" for="logInPassword">Password</label>
+                            <input type="password" class="form-control" id="logInPassword" placeholder="Enter password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Log in</button>
+                        <button type="submit" class="submit">Log in</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header row col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <h2 style="text-align: center;" class="modal-title" id="aboutModalLabel">About</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" data-bs-dismiss="modal" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="stars">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
+                <div class="modal-body">
+                    <p class="aboutTitle">creators</p>
+                    <div><a class="aboutText" href="https://github.com/vmustone">Ville</a></div>
+                    <div><a class="aboutText" href="https://github.com/mtoof/mtoof?tab=readme-ov-file">Mojtaba</a></div>
+                    <div><a class="aboutText" href="https://github.com/abbastoof">Abbas</a></div>
+                    <div><a class="aboutText" href="https://github.com/Sir-Eli">Elina</a></div>
+                    <div><a class="aboutText" href="https://github.com/trsctr">Otto</a></div>
+                    <div><a class="aboutText" href="https://github.com/jhesso">Juho</a></div>
+                    <div><a class="aboutText" href="https://github.com/fotogiorgo">Jorgo</a></div>
+
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/signup.js"></script>
     <script src="js/login.js"></script>
 
 
