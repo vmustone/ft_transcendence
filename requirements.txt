@@ -1,0 +1,38 @@
+# Application dependencies
+Django
+djangorestframework
+fastapi
+uvicorn
+mysqlclient
+requests
+
+# Testing dependencies
+pytest
+
+# Security dependencies
+bandit
+
+# Other dependencies
+docker
+Pillow
+django-redis
+asgiref
+channels
+channels-redis
+idna
+pytz
+python-dateutil
+simplejson
+urllib3
+sqlparse
+PyYAML
+typing_extensions
+django-rest-swagger
+django-rest-knox
+django-rest-auth
+django-allauth
+channels
+
+# Build dependencies
+setuptools
+wheel

@@ -1,0 +1,121 @@
+
+networks:
+  transcendence_network:
+    name: transcendence_network
+    driver: bridge
+
+volumes:
+  www_data:
+    name: www_data
+  # database:
+  #   name: database
+  #   driver: local
+  #   driver_opts:
+  #     type: 'none'
+  #     device: './database_volume'
+  #     o: 'bind'
+
+services:
+  redis:
+    container_name: redis
+    image: redis:alpine
+    networks:
+      - transcendence_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  user-service:
+    container_name: user-service
+    image: user-service
+    build:
+      context: .
+      dockerfile: Backend/user_service/Dockerfile
+    env_file:
+      - .env
+    networks:
+      - transcendence_network
+    volumes:
+      - www_data:/app/www/avatars
+      # - database:/var/lib/postgresql/
+    depends_on:
+      - postgresql
+
+  token-service:
+    container_name: token-service
+    image: token-service
+    build:
+      context: .
+      dockerfile: Backend/token_service/Dockerfile
+    env_file:
+      - .env
+    networks:
+      - transcendence_network
+    depends_on:
+      - postgresql
+
+  game-history:
+    container_name: game-history
+    image: game-history
+    build:
+      context: .
+      dockerfile: Backend/game_history/Dockerfile
+    env_file:
+      - .env
+    networks:
+      - transcendence_network
+    depends_on:
+      - postgresql
+
+  game-server:
+    container_name: game-server
+    image: game-server
+    build:
+      context: .
+      dockerfile: Game_server/Dockerfile
+    env_file:
+      - .env
+    networks:
+      - transcendence_network
+    depends_on:
+      - postgresql
+
+  postgresql:
+    container_name: postgresql
+    image: postgresql
+    build:
+      context: .
+      dockerfile: ./Backend/postgresql/Dockerfile
+    env_file:
+      - .env
+    networks:
+      - transcendence_network
+
+
+  frontend:
+    container_name: frontend
+    image: frontend
+    build:
+      context: .
+      dockerfile: Frontend/Dockerfile
+      target: ${TARGET:-production}  # Build stage based on the TARGET environment variable
+    env_file:
+      - .env
+    ports:
+      - "3001:3000"  # Development port mapping for Vite
+      - "3000:443"   # Production port mapping for Nginx
+    volumes:
+      - ./Frontend/src:/app/src  # Mount the source code directory for live reloading in dev mode
+      - /app/node_modules  # Prevent overwriting node_modules
+      - www_data:/www/avatars
+    networks:
+      - transcendence_network
+    depends_on:
+      - user-service
+      - token-service
+      - game-history
+      - game-server
+      - postgresql
+      - redis

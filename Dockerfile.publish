@@ -1,0 +1,24 @@
+FROM alpine:3.20
+
+# Install Python and pip
+RUN apk add --no-cache python3 py3-pip
+
+# Create and activate virtual environment
+RUN python3 -m venv /venv
+
+# Copy requirements and install within virtual environment
+COPY ./requirements.txt /requirements.txt
+RUN /venv/bin/pip install --no-cache-dir -r /requirements.txt
+
+WORKDIR /app
+
+COPY . /app
+
+RUN addgroup -S www-data && adduser -S www-data -G www-data && \
+    chown -R www-data:www-data /app
+
+USER www-data
+
+EXPOSE 8000
+
+CMD ["/venv/bin/python", "manage.py", "runserver", "0.0.0.0:8000"]
